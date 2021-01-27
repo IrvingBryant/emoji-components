@@ -1,0 +1,15 @@
+{
+  "表情": {
+    ":smile:": "smile.png",
+    ":applaud:": "applaud.png",
+    ":cry:": "cry.png",
+    ":laughing_out_loud:": "laughing_out_loud.png",
+    ":wronged:": "wronged.png",
+    ":embrace:": "embrace.png",
+    ":shake_hands:": "shake_hands.png",
+    ":thumbs_up:": "thumbs_up.png",
+    ":love:": "love.png",
+    ":rose_flower:": "rose_flower.png",
+    ":anger:": "anger.png"
+  }
+}
