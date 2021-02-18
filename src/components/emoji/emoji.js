@@ -38,5 +38,5 @@ function escHTML (str) {
 }
 function createIcon (item) {
   const value = emojiData[item]+"?max_age=31536000";
-  return `<img src=${path}${value} style="vertical-align:middle" width="22px" height="22px" />`
+  return `<img src=${path}${value} style="vertical-align:middle" width="22px" height="22px" data-gemini-emoji=${item} />`
 }

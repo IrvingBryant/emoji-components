@@ -145,6 +145,9 @@ export default {
       const event = e || event 
       var items = event.clipboardData.items,
         len = items.length;
+      var isHasTextHtml = Array.prototype.some.call(items,(v)=>{
+        return v.type === 'text/html' && v.kind === "string"
+      })
       for (var i = 0; i < len; i++) {
         var item = items[i];
         if (item.kind == "file") {
@@ -154,7 +157,24 @@ export default {
             console.log('复制文件到输入框触发',file)
           }
         }
-        if (item.kind === "string" && item.type === "text/plain") {
+        if (item.kind === "string" && item.type === "text/html" && isHasTextHtml) {
+          var objE = document.createElement("div");
+          item.getAsString((str) => {
+            objE.innerHTML = str;
+            let copyNodes = objE.childNodes
+            copyNodes.forEach((v)=>{
+              if(v.nodeName === 'IMG' && v.getAttribute('data-gemini-emoji')){
+                var emojiText = createImgNode(v.getAttribute('data-gemini-emoji'))
+                this.cursorMove(emojiText)         
+              }
+              if(v.nodeName !== 'IMG'){
+                var textNode = document.createTextNode(v.innerText);
+                this.cursorMove(textNode)
+              }
+            })
+          });
+        }
+        if (item.kind === "string" && item.type === "text/plain" && !isHasTextHtml) {
           item.getAsString((str) => {
             var textNode = document.createTextNode(str);
             this.cursorMove(textNode)
