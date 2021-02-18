@@ -158,13 +158,14 @@ export default {
           }
         }
         if (item.kind === "string" && item.type === "text/html" && isHasTextHtml) {
-          var objE = document.createElement("div");
+          let objE = document.createElement("div");
           item.getAsString((str) => {
             objE.innerHTML = str;
             let copyNodes = objE.childNodes
             copyNodes.forEach((v)=>{
-              if(v.nodeName === 'IMG' && v.getAttribute('data-gemini-emoji')){
-                var emojiText = createImgNode(v.getAttribute('data-gemini-emoji'))
+              let emojiTxt = v.nodeName === 'IMG' && v.getAttribute('data-gemini-emoji')
+              if(emojiTxt){
+                var emojiText = createImgNode(emojiTxt)
                 this.cursorMove(emojiText)         
               }
               if(v.nodeName !== 'IMG'){
